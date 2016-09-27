@@ -439,7 +439,7 @@ func init() {
 	// FIXME: Find a way to call OleUninitialize at app shutdown
 	// Maybe we should require explicit walk.Initialize/walk.Shutdown?
 	if hr := OleInitialize(); FAILED(hr) {
-		panic("OleInitialize Error: " + syscall.Errstr(int(hr)))
+		panic("OleInitialize Error: " + Errstr(int(hr)))
 	}
 }
 

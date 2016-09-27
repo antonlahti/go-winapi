@@ -44,18 +44,18 @@ type GUID struct {
 }
 
 func MustLoadLibrary(name string) uintptr {
-	lib, errno := syscall.LoadLibrary(name)
-	if errno != 0 {
-		panic(fmt.Sprintf(`syscall.LoadLibrary("%s") failed: %s`, name, syscall.Errstr(errno)))
+	lib, err := syscall.LoadLibrary(name)
+	if err != nil {
+		panic(fmt.Sprintf(`syscall.LoadLibrary("%s") failed: %s`, name, err))
 	}
 
 	return uintptr(lib)
 }
 
 func MustGetProcAddress(lib uintptr, name string) uintptr {
-	addr, errno := syscall.GetProcAddress(syscall.Handle(lib), name)
-	if errno != 0 {
-		panic(fmt.Sprintf(`syscall.GetProcAddress(%d, "%s") failed: %s`, lib, name, syscall.Errstr(errno)))
+	addr, err := syscall.GetProcAddress(syscall.Handle(lib), name)
+	if err != nil {
+		panic(fmt.Sprintf(`syscall.GetProcAddress(%d, "%s") failed: %s`, lib, name, err))
 	}
 
 	return uintptr(addr)
